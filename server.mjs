@@ -1,5 +1,4 @@
-
-const express = require('express')
+import express from 'express'
 
 const app = express()
 const PORT = 3000 || 4000
@@ -7,7 +6,6 @@ const PORT = 3000 || 4000
 app.get('/', (res, req)=>{
     res.send("Express route working")
 })
-
 
 
 app.listen(PORT, ()=>{
