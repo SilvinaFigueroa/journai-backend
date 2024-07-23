@@ -24,7 +24,7 @@ const journalSchema = new mongoose.Schema({
         require: true
     }
 
-})
+}, { timestamps: true } )
 
 const Journal = mongoose.model('journal', journalSchema)
 

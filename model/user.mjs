@@ -1,4 +1,6 @@
 import mongoose from "mongoose"
+import isEmail from 'validator/lib/isEmail.js' // https://www.npmjs.com/package/validator
+
 
 const userSchema = new mongoose.Schema({
 
@@ -14,6 +16,13 @@ const userSchema = new mongoose.Schema({
         required: true,
         minLength: 1,
         maxLength: 50
+    },
+
+    password: {
+        type: String,
+        required: true,
+        minLength: 6,
+        maxLength: 12
     },
 
     email: {
