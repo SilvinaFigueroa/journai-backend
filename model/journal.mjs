@@ -8,7 +8,9 @@ const journalSchema = new mongoose.Schema({
     }, 
     
     content:{
-        type: String
+        type: String,
+        required: true
+
     },
 
     weatherData: {
@@ -16,12 +18,14 @@ const journalSchema = new mongoose.Schema({
     }, 
 
     inputMood: {
-        type: String
+        type: String,
+        required: true
+
     },
 
     location: {
         type: String,
-        require: true
+        required: true
     }
 
 }, { timestamps: true } )
