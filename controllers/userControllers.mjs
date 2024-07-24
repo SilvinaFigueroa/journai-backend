@@ -47,12 +47,11 @@ const UpdateUser = async (req, res) => {
         if (lastName) updatedFields.lastName = lastName
         if (location) updatedFields.location = location
 
-        // update the user by ID passing the values updated (updatedFields obj)
+        // update the user by ID setting the values updated (updatedFields obj)
         const updateUser = await User.findByIdAndUpdate(userId, updatedFields,
             { new: true }) // new : true -> returns the updated user 
 
-        res.json(updateUser)
-        res.status(201).json({msg : "User Updated"})
+        res.status(201).json({msg : `User ${updateUser} Updated`})
 
 
     } catch (err) {
@@ -67,7 +66,7 @@ const UpdateUser = async (req, res) => {
 const InfoUser = async (req, res) => {
 
     const userId = req.params.id
-    const userData = await findOne({ _id: userId })
+    const userData = await User.findOne({ _id: userId })
 
     res.json(userData)
 }
@@ -77,13 +76,11 @@ const InfoUser = async (req, res) => {
 const DeleteUser = async (req, res) => {
 
     const userId = req.params.id
-    await findAndDelete({ _id: userId })
+    await User.findByIdAndDelete({ _id: userId })
 
     res.status(200).json({msg : "User Deleted"})
 
 }
-
-
 
 // exporting all the controller funtions as one object to use dot notation and access them
 export default { CreateUser, UpdateUser, InfoUser, DeleteUser}
