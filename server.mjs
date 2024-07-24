@@ -3,6 +3,8 @@ import dotenv from 'dotenv'
 import cors from 'cors'
 import connectDB from './config/database.mjs'
 import userRoutes from './routes/user.mjs'
+import journalRoutes from './routes/journal.mjs'
+
 
 
 const app = express()
@@ -26,7 +28,7 @@ app.get('/', (req, res)=> {
 
 // Routes 
 app.use('/users', userRoutes)
-
+app.use('/journal', journalRoutes)
 
 
 // Server Connection 

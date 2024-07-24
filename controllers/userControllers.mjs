@@ -21,8 +21,6 @@ const CreateUser = async (req, res) => {
         await user.save()
 
         res.send("User Created")
-        res.status(200).json({msg : "User Created"})
-
 
     } catch (err) {
         console.error(err)
@@ -71,14 +69,20 @@ const InfoUser = async (req, res) => {
     res.json(userData)
 }
 
-// TODO: DELETE ALL THE JOURNALS ASSOCIATED TO THE USER 
 
 const DeleteUser = async (req, res) => {
 
     const userId = req.params.id
-    await User.findByIdAndDelete({ _id: userId })
+    //Find user email with the user ID
+    const userEmail = (await User.findOne({ _id: userId })).email
 
-    res.status(200).json({msg : "User Deleted"})
+    // Use the user email to filter all the journals entry of that user and delete them
+    const journalsDeleted = await Journal.deleteMany({ userReference: userEmail })
+
+    // Delete the user
+    const userDeleted = await User.findByIdAndDelete({ _id: userId })
+
+    res.status(200).json({msg : "User and Journals entry associated deleted"})
 
 }
 
