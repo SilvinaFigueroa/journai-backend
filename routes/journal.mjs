@@ -19,5 +19,4 @@ router.get('/info/:id', JournalCRUD.InfoJournal)
 router.delete('/delete/:id', JournalCRUD.DeleteJournal)
 
 
-
 export default router

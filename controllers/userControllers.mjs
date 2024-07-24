@@ -1,4 +1,5 @@
 import User from "../model/user.mjs"
+import Journal from "../model/journal.mjs"
 
 
 // Controller functions
@@ -49,7 +50,7 @@ const UpdateUser = async (req, res) => {
         const updateUser = await User.findByIdAndUpdate(userId, updatedFields,
             { new: true }) // new : true -> returns the updated user 
 
-        res.status(201).json({msg : `User ${updateUser} Updated`})
+        res.status(201).json({ msg: `User ${updateUser} Updated` })
 
 
     } catch (err) {
@@ -62,29 +63,39 @@ const UpdateUser = async (req, res) => {
 // TODO : ADD THE JOURNALS INFO PER USER 
 
 const InfoUser = async (req, res) => {
+    try {
+        const userId = req.params.id
+        const userData = await User.findOne({ _id: userId })
 
-    const userId = req.params.id
-    const userData = await User.findOne({ _id: userId })
-
-    res.json(userData)
+        res.json(userData)
+    } catch (err) {
+        console.error(err)
+        res.status(500).json({ msg: `Server Error` })
+    }
 }
 
 
 const DeleteUser = async (req, res) => {
 
     const userId = req.params.id
-    //Find user email with the user ID
-    const userEmail = (await User.findOne({ _id: userId })).email
 
-    // Use the user email to filter all the journals entry of that user and delete them
-    const journalsDeleted = await Journal.deleteMany({ userReference: userEmail })
+    try {
+        //Find user email with the user ID
+        const userEmail = (await User.findOne({ _id: userId })).email
 
-    // Delete the user
-    const userDeleted = await User.findByIdAndDelete({ _id: userId })
+        // Use the user email to filter all the journals entry of that user and delete them
+        const journalsDeleted = await Journal.deleteMany({ userReference: userEmail })
 
-    res.status(200).json({msg : "User and Journals entry associated deleted"})
+        // Delete the user
+        const userDeleted = await User.findByIdAndDelete({ _id: userId })
 
+        res.status(200).json({ msg: "User and Journals entry associated deleted" })
+
+    } catch (err) {
+        console.error(err)
+        res.status(500).json({ msg: `Server Error` })
+    }
 }
 
 // exporting all the controller funtions as one object to use dot notation and access them
-export default { CreateUser, UpdateUser, InfoUser, DeleteUser}
+export default { CreateUser, UpdateUser, InfoUser, DeleteUser }

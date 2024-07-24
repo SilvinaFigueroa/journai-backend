@@ -7,18 +7,19 @@ import Journal from "../model/journal.mjs"
 const CreateJournal = async (req, res) => {
 
     // destructure request 
-    const {email} = req.params // email is an user unique identifier 
-    const { content, inputMood, location } = req.body
-    
+    const { email } = req.params // email is an user unique identifier 
+    const { content, weatherData, inputMood, location } = req.body
+
     console.log(`userEmail ${email} content ${content} inputMood ${inputMood} location ${location}`)
 
     try {
         // create Journal 
         let journal = new Journal({
-            userReference: email,  
+            userReference: email,
             content,
+            weatherData,
             inputMood,
-            location,
+            location
         })
         // saving user created 
         await journal.save()
@@ -41,7 +42,10 @@ const UpdateJournal = async (req, res) => {
     console.log(`content ${content} inputMood ${inputMood} location ${location}`)
 
     try {
-        // validate which fields are updated and create an updated elements object
+        // Check if any of the fields was updated
+        if (!content && !inputMood && !location) res.send("There is no new data to update")
+
+        // Add updated fields to an obj to set the new values on the Journal entry
         const updatedFields = {}
         if (content) updatedFields.content = content
         if (inputMood) updatedFields.inputMood = inputMood
@@ -50,8 +54,9 @@ const UpdateJournal = async (req, res) => {
         // update the journal by ID setting the values updated (updatedFields obj)
         const updateJournal = await Journal.findByIdAndUpdate(journalID, updatedFields,
             { new: true }) // new : true -> returns the updated Journal 
+        console.log(updateJournal)
 
-        res.status(201).json({msg : `User ${updateJournal} Updated`})
+        res.status(201).json({ msg: `Journal ${journalID} Updated` })
 
 
     } catch (err) {
@@ -61,27 +66,35 @@ const UpdateJournal = async (req, res) => {
     }
 }
 
-
 const InfoJournal = async (req, res) => {
+    try {
+        const journalID = req.params.id
+        const journalData = await Journal.findOne({ _id: journalID })
 
-    const journalID = req.params.id
-    const journalData = await Journal.findOne({ _id: journalID })
+        res.json(journalData)
 
-    res.json(journalData)
+    } catch (err) {
+        console.error(err)
+        res.status(500).json({ msg: `Server Error` })
+    }
 }
 
 // TODO: DELETE ALL THE JOURNALS ASSOCIATED TO THE USER 
 
 const DeleteJournal = async (req, res) => {
 
-    const journalID = req.params.id
-    await Journal.findByIdAndDelete({ _id: journalID })
+    try {
+        const journalID = req.params.id
+        await Journal.findByIdAndDelete({ _id: journalID })
 
-    res.status(200).json({msg : "Journal Deleted"})
-
+        res.status(200).json({ msg: "Journal Deleted" })
+    } catch (err) {
+        console.error(err)
+        res.status(500).json({ msg: `Server Error` })
+    }
 }
 
 
 
 // exporting all the controller funtions as one object to use dot notation and access them
-export default { CreateJournal, UpdateJournal, InfoJournal, DeleteJournal}
+export default { CreateJournal, UpdateJournal, InfoJournal, DeleteJournal }
