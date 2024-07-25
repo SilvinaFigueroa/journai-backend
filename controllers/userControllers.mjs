@@ -4,7 +4,15 @@ import Journal from "../model/journal.mjs"
 
 // Controller functions
 
-const CreateUser = async (req, res) => {
+const CreateUser = [
+    // Validation array: check(parameter, error message).validation function()
+    check('firstName', 'First name is required').not().isEmpty(),
+    check('LastName', 'Last name is required').not().isEmpty(),
+    check('Location', 'Location is required').not().isEmpty(),
+    check('email', "Include a valid email").isEmail(),
+    check('password', "Enter a password with 8 or more characters").isLength({min: 8})]
+    
+    async (req, res) => {
     // destructure request 
     const { firstName, lastName, password, email, location } = req.body
     console.log(`firstName ${firstName} lastName ${lastName} password ${password} email ${email} location ${location}`)
@@ -98,4 +106,4 @@ const DeleteUser = async (req, res) => {
 }
 
 // exporting all the controller funtions as one object to use dot notation and access them
-export default { CreateUser, UpdateUser, InfoUser, DeleteUser }
+export default { CreateUser, UpdateUser, InfoUser, DeleteUser}

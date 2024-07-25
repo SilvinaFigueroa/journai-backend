@@ -4,7 +4,7 @@ import cors from 'cors'
 import connectDB from './config/database.mjs'
 import userRoutes from './routes/user.mjs'
 import journalRoutes from './routes/journal.mjs'
-
+import loginRoutes from './routes/login.mjs'
 
 
 const app = express()
@@ -29,6 +29,7 @@ app.get('/', (req, res)=> {
 // Routes 
 app.use('/users', userRoutes)
 app.use('/journal', journalRoutes)
+app.use('/login', loginRoutes)
 
 
 // Server Connection 
