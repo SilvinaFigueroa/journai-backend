@@ -1,15 +1,10 @@
 import User from '../model/user.mjs'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
-import {check, validationResult } from 'express-validator'
+import {validationResult } from 'express-validator'
 
 
-const userLogin = [
-    // Validation array: check(parameter, error message).validation function()
-    check('email', "Include a valid email").isEmail(),
-    check('password', "Enter a password with 8 or more characters").isLength({min: 8})]
-
-    async (req, res)=> {
+const userLogin = async (req, res)=> {
 
     // validate request
     const errors = validationResult(req) // check the request agains the validation array
@@ -69,6 +64,5 @@ const userLogin = [
 
 }
 
-export default userLogin
-
+export default { userLogin }
 

@@ -1,4 +1,5 @@
 import express from 'express'
+import auth from '../middleware/auth.mjs'
 
 // Express Router
 const router = express.Router()
@@ -10,13 +11,13 @@ router.get('/', (req, res) => res.send('Testing Journal Route'))
 
 
     // Creating a jounal entry using the user email to asociate it with the user account
-router.post('/new/:email', JournalCRUD.CreateJournal) 
+router.post('/new/:email', auth, JournalCRUD.CreateJournal) 
 
-router.put('/update/:id', JournalCRUD.UpdateJournal)
+router.put('/update/:id', auth, JournalCRUD.UpdateJournal)
 
-router.get('/info/:id', JournalCRUD.InfoJournal)
+router.get('/info/:id', auth, JournalCRUD.InfoJournal)
 
-router.delete('/delete/:id', JournalCRUD.DeleteJournal)
+router.delete('/delete/:id', auth, JournalCRUD.DeleteJournal)
 
 
 export default router

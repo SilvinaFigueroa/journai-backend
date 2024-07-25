@@ -2,21 +2,14 @@ import User from "../model/user.mjs"
 import Journal from "../model/journal.mjs"
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
-import { check, validationResult } from 'express-validator'
+import { validationResult } from 'express-validator'
 
 
 // Controller functions
 
-const CreateUser = [
+const CreateUser = async (req, res) => {
     // Validation array: check(parameter, error message).validation function()
-    check('firstName', 'First name is required').not().isEmpty(),
-    check('LastName', 'Last name is required').not().isEmpty(),
-    check('Location', 'Location is required').not().isEmpty(),
-    check('email', "Include a valid email").isEmail(),
-    check('password', "Enter a password with 8 or more characters").isLength({ min: 8 })]
-
-async (req, res) => {
-
+        
     // validate request
     const errors = validationResult(req) // check the request agains the validation array
 
@@ -58,7 +51,7 @@ async (req, res) => {
         const payload = {
             user: {
                 id: user.id,
-                name: user.name
+                name: user.firstName
             }
         }
         // create the json web token 
