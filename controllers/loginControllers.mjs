@@ -1,12 +1,7 @@
-import express from 'express'
 import User from '../model/user.mjs'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import {check, validationResult } from 'express-validator'
-import isEmail from 'validator/lib/isEmail'
-
-
-const router = express.Router()
 
 
 const userLogin = [
@@ -16,9 +11,9 @@ const userLogin = [
 
     async (req, res)=> {
 
-    // Include errors on a variable 
-    const errors = validationResult(req)
-
+    // validate request
+    const errors = validationResult(req) // check the request agains the validation array
+ 
     // If there are errors, send them as status 400 error
     if(!errors.isEmpty){
         return res.status(400).json({ errors : errors.array() })
@@ -50,7 +45,8 @@ const userLogin = [
         // create a jwt payload
         const payload ={
             user : {
-                id : user._id
+                id : user._id, 
+                name: user.name
             }
         }
 

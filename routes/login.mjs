@@ -6,9 +6,7 @@ const router = express.Router()
 import Login from '../controllers/loginControllers.mjs'
 
 
-
 router.post('/', Login.userLogin)
-
 
 
 export default router
