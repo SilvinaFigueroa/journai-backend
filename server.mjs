@@ -27,7 +27,7 @@ app.get('/', (req, res)=> {
 })
 
 // Routes 
-app.use('/users', userRoutes)
+app.use('/user', userRoutes)
 app.use('/journal', journalRoutes)
 app.use('/login', loginRoutes)
 
