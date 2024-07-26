@@ -19,6 +19,7 @@ router.post('/new',
     check('email', "Include a valid email").isEmail(),
     check('password', "Enter a password with 8 or more characters").isLength({ min: 8 })], 
     userCRUD.CreateUser)
+    
 
 router.put('/update/:id', auth, userCRUD.UpdateUser)
  

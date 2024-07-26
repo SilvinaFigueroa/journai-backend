@@ -10,7 +10,7 @@ const userLogin = async (req, res)=> {
     const errors = validationResult(req) // check the request agains the validation array
  
     // If there are errors, send them as status 400 error
-    if(!errors.isEmpty){
+    if(!errors.isEmpty()){
         return res.status(400).json({ errors : errors.array() })
     }
 
@@ -41,7 +41,7 @@ const userLogin = async (req, res)=> {
         const payload ={
             user : {
                 id : user._id, 
-                name: user.name
+                name: user.firstName
             }
         }
 
@@ -53,15 +53,14 @@ const userLogin = async (req, res)=> {
                 if (err) throw err
                 // if there is no error send token
                 res.json(token)
+                console.log('User Authenticated!')
             }
         )
 
     } catch (err) {
         console.error(err)
-        res.status(500).json({errors : [{msg : 'Server Error'}] })
-        
+        res.status(500).json({errors : [{msg : 'Server Error'}] })   
     }
-
 }
 
 export default { userLogin }

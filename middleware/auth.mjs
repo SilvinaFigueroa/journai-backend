@@ -16,7 +16,6 @@ export default (req, res, next) => {
         const decoded = jwt.verify(token, process.env.jwtSecret)
         // Attach user to request
         req.user = decoded.user
-
         next()
 
     } catch (err) {
