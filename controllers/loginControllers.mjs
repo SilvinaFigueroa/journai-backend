@@ -21,6 +21,7 @@ const userLogin = async (req, res)=> {
 
         // Check if user exist using the email 
         let user = await User.findOne( {email} )
+        console.log(JSON.stringify(`userLogin: User: ${user}`))
         // return error if user doesn't exist 
         if(!user){
             return res.status(400).json({errors : [{msg : "Invalid Credentials"}] })
@@ -38,10 +39,11 @@ const userLogin = async (req, res)=> {
         }
 
         // create a jwt payload
-        const payload ={
-            user : {
-                id : user._id, 
-                name: user.firstName
+        const payload = {
+            user: {
+                id: user.id,
+                name: user.firstName,
+                location: user.location
             }
         }
 
@@ -49,11 +51,12 @@ const userLogin = async (req, res)=> {
         jwt.sign(
             payload,
             process.env.jwtSecret,
-            {expiresIn: 3600}, (err, token)=>{
+            {expiresIn: 3600}, 
+            (err, token)=>{
                 if (err) throw err
                 // if there is no error send token
-                res.json(token)
-                console.log('User Authenticated!')
+                res.json({token})
+                console.log(`jwt.sign - User ${JSON.stringify(user.firstName)} authenticated!`)
             }
         )
 

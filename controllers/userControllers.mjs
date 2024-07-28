@@ -51,9 +51,11 @@ const CreateUser = async (req, res) => {
         const payload = {
             user: {
                 id: user.id,
-                name: user.firstName
+                name: user.firstName,
+                location : location
             }
         }
+
         // create the json web token 
         jwt.sign(
             payload,
@@ -61,12 +63,12 @@ const CreateUser = async (req, res) => {
             { expiresIn: 3600 },
             (err, token) => {
                 if (err) throw err
-
                 res.json({ token })
+                console.log(`jwt.sign - User ${JSON.stringify(user.firstName)} authenticated!`)
             }
         )
 
-        console.log('User Created')
+        console.log(`User ${user.name} created`)
 
     } catch (err) {
         console.error(err)
