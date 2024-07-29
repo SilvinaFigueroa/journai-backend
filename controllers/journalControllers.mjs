@@ -37,8 +37,7 @@ const UpdateJournal = async (req, res) => {
 
     // destructure request 
     const journalID = req.params.id
-    const { content, inputMood } = req.body
-    console.log(`content ${content} inputMood ${inputMood} location ${location}`)
+    const { content, inputMood, location } = req.body
 
     try {
         // Check if any of the fields was updated
@@ -93,9 +92,9 @@ const DeleteJournal = async (req, res) => {
 
 const SearchJournals = async (req, res) =>{
 
-    // destructure params 
-    const { userReference, startDate, endDate } = req.params
-
+    // destructure query params passed on the call with axios
+    const { userReference, startDate, endDate } = req.query
+    console.log(`userReference ${userReference}, startDate ${startDate}, endDate ${endDate} `)
 
     try {
         const journals = await Journal.find({
@@ -106,7 +105,7 @@ const SearchJournals = async (req, res) =>{
             $lt: new Date(endDate)
             }
         })
-
+        console.log(`Journals fetch for search ${journals}`)
         res.json(journals)
         
     } catch (err) {
