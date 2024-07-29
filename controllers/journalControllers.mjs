@@ -37,7 +37,7 @@ const UpdateJournal = async (req, res) => {
 
     // destructure request 
     const journalID = req.params.id
-    const { content, inputMood, location } = req.body
+    const { content, inputMood } = req.body
     console.log(`content ${content} inputMood ${inputMood} location ${location}`)
 
     try {
@@ -78,8 +78,6 @@ const InfoJournal = async (req, res) => {
     }
 }
 
-// TODO: DELETE ALL THE JOURNALS ASSOCIATED TO THE USER 
-
 const DeleteJournal = async (req, res) => {
 
     try {
@@ -93,7 +91,32 @@ const DeleteJournal = async (req, res) => {
     }
 }
 
+const SearchJournals = async (req, res) =>{
+
+    // get date parameters from query
+    const { startDate, endDate } = req.query
+    const userEmail = req.user.email
+
+    try {
+        const journals = await Journal.find({
+            userReference : userEmail,
+            createdAt: {
+            // data range for search
+            $gte : new Date(startDate),
+            $lt: new Date(endDate)
+            }
+        })
+
+        res.json(journals)
+        
+    } catch (err) {
+        console.error(err)
+        res.status(500).json({ msg: 'Server Error' });
+        
+    }
+
+}
 
 
 // exporting all the controller funtions as one object to use dot notation and access them
-export default { CreateJournal, UpdateJournal, InfoJournal, DeleteJournal }
+export default { CreateJournal, UpdateJournal, InfoJournal, DeleteJournal, SearchJournals}

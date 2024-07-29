@@ -19,5 +19,8 @@ router.get('/info/:id', auth, JournalCRUD.InfoJournal)
 
 router.delete('/delete/:id', auth, JournalCRUD.DeleteJournal)
 
+// Search journals by date range
+router.get('/search', auth, journalCRUD.SearchJournals)
+
 
 export default router
