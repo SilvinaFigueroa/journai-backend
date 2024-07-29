@@ -93,13 +93,13 @@ const DeleteJournal = async (req, res) => {
 
 const SearchJournals = async (req, res) =>{
 
-    // get date parameters from query
-    const { startDate, endDate } = req.query
-    const userEmail = req.user.email
+    // destructure params 
+    const { userReference, startDate, endDate } = req.params
+
 
     try {
         const journals = await Journal.find({
-            userReference : userEmail,
+            userReference,
             createdAt: {
             // data range for search
             $gte : new Date(startDate),
