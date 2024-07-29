@@ -11,7 +11,7 @@ router.get('/', (req, res) => res.send('Testing Journal Route'))
 
 
     // Creating a jounal entry using the user email to asociate it with the user account
-router.post('/new/:email', auth, JournalCRUD.CreateJournal) 
+router.post('/new/', auth, JournalCRUD.CreateJournal) 
 
 router.put('/update/:id', auth, JournalCRUD.UpdateJournal)
 

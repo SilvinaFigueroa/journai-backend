@@ -51,6 +51,7 @@ const CreateUser = async (req, res) => {
         const payload = {
             user: {
                 id: user.id,
+                email: user.email,
                 name: user.firstName,
                 location : location
             }

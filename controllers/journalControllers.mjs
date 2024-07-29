@@ -7,15 +7,14 @@ import Journal from "../model/journal.mjs"
 const CreateJournal = async (req, res) => {
 
     // destructure request 
-    const { email } = req.params // email is an user unique identifier 
-    const { content, weatherData, inputMood, location } = req.body
+    const { email, content, weatherData, inputMood, location } = req.body
 
-    console.log(`userEmail ${email} content ${content} inputMood ${inputMood} location ${location}`)
+    console.log(`userEmail ${email} content ${content} inputMood ${inputMood} weatherData ${weatherData} location ${location}`)
 
     try {
         // create Journal 
         let journal = new Journal({
-            userReference: email,
+            userReference : email,
             content,
             weatherData,
             inputMood,

@@ -43,6 +43,7 @@ const userLogin = async (req, res)=> {
             user: {
                 id: user.id,
                 name: user.firstName,
+                email: user.email,
                 location: user.location
             }
         }
