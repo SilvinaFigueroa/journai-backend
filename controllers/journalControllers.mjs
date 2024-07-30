@@ -91,18 +91,27 @@ const DeleteJournal = async (req, res) => {
 }
 
 const SearchJournals = async (req, res) =>{
+    console.log(`Received search query: userReference=${userReference}, startDate=${startDate}, endDate=${endDate}`);
 
     // destructure query params passed on the call with axios
     const { userReference, startDate, endDate } = req.query
     console.log(`userReference ${userReference}, startDate ${startDate}, endDate ${endDate} `)
 
     try {
+        const start = new Date(startDate);
+        const end = new Date(endDate);
+        
+        // ensuring the end date includes the whole end day
+        end.setHours(23, 59, 59, 999);
+        
+        console.log(`Parsed dates: start=${start.toISOString()}, end=${end.toISOString()}`);
+
         const journals = await Journal.find({
             userReference,
             createdAt: {
             // data range for search
-            $gte : new Date(startDate),
-            $lt: new Date(endDate)
+            $gte : start,
+            $lt: end
             }
         })
         console.log(`Journals fetch for search ${journals}`)
