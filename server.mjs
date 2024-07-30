@@ -13,10 +13,11 @@ const app = express()
 // Middleware
     // Cross-Origin Resource Sharing - interactions between different origins (domains) - 
     app.use(cors({
-        origin: 'http://localhost:5173', 
-        methods: 'GET,POST,PUT,DELETE',
-        allowedHeaders: 'Content-Type,Authorization,x-auth-token'
-    }))
+        origin: ['http://localhost:5173', 'https://journai.netlify.app'],
+        methods: ['GET', 'POST', 'PUT', 'DELETE'],
+        allowedHeaders: ['Content-Type', 'Authorization', 'x-auth-token'],
+        credentials: true // Included to send cookies or authentication headers
+    }));
 
     // Parses incoming requests with URL-encoded (for instance, forms)
     app.use(express.urlencoded({extended : false}))
