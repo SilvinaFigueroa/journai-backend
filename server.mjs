@@ -15,9 +15,9 @@ const app = express()
     app.use(cors({
         origin: 'http://localhost:5173', 
         methods: 'GET,POST,PUT,DELETE',
-        allowedHeaders: 'Content-Type,Authorization'
+        allowedHeaders: 'Content-Type,Authorization,x-auth-token'
     }))
-    
+
     // Parses incoming requests with URL-encoded (for instance, forms)
     app.use(express.urlencoded({extended : false}))
     // Parse request Object as a JSON Object
