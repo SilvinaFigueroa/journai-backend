@@ -91,10 +91,11 @@ const DeleteJournal = async (req, res) => {
 }
 
 const SearchJournals = async (req, res) =>{
-    console.log(`Received search query: userReference=${userReference}, startDate=${startDate}, endDate=${endDate}`);
 
     // destructure query params passed on the call with axios
     const { userReference, startDate, endDate } = req.query
+    console.log(`Received search query: userReference=${userReference}, startDate=${startDate}, endDate=${endDate}`);
+
     console.log(`userReference ${userReference}, startDate ${startDate}, endDate ${endDate} `)
 
     try {

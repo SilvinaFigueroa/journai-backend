@@ -12,7 +12,12 @@ const app = express()
 
 // Middleware
     // Cross-Origin Resource Sharing - interactions between different origins (domains) - 
-    app.use(cors())
+    app.use(cors({
+        origin: 'http://localhost:5173', 
+        methods: 'GET,POST,PUT,DELETE',
+        allowedHeaders: 'Content-Type,Authorization'
+    }))
+    
     // Parses incoming requests with URL-encoded (for instance, forms)
     app.use(express.urlencoded({extended : false}))
     // Parse request Object as a JSON Object
