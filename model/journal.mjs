@@ -5,6 +5,7 @@ const journalSchema = new mongoose.Schema({
     userReference: {
         type: String, // User email as unique identifier 
         required: true, 
+        index: true // Adding index
     }, 
     
     content:{
@@ -29,6 +30,9 @@ const journalSchema = new mongoose.Schema({
     }
 
 }, { timestamps: true } )
+
+// Compound index on userReference and createdAt for faster queries with a unique name
+journalSchema.index({ userReference: 1, createdAt: -1 }, { name: "userReference_createdAt_index" });
 
 const Journal = mongoose.model('journal', journalSchema)
 

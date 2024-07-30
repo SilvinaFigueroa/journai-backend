@@ -28,7 +28,8 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         validate: [isEmail, "Invalid Email"],
-        unique: true
+        unique: true,
+        index: { unique: true, name: "email_index" } // Adding index with a unique name
     },
     location: {
         type: String,
