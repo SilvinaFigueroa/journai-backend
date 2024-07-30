@@ -10,14 +10,18 @@ import apiRoutes from './routes/api.mjs'
 
 const app = express()
 
+dotenv.config();
+
+
+
 // Middleware
-    // Cross-Origin Resource Sharing - interactions between different origins (domains) - 
-    app.use(cors({
-        origin: ['http://localhost:5173', 'https://journai.netlify.app'],
-        methods: ['GET', 'POST', 'PUT', 'DELETE'],
-        allowedHeaders: ['Content-Type', 'Authorization', 'x-auth-token'],
-        credentials: true // Included to send cookies or authentication headers
-    }));
+// Cross-Origin Resource Sharing - interactions between different origins (domains) - 
+app.use(cors({
+    origin: [process.env.LOCALHOST_URL, process.env.PRODUCTION_URL],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'x-auth-token'],
+    credentials: true // Included to send cookies or authentication headers
+}));
 
     // Parses incoming requests with URL-encoded (for instance, forms)
     app.use(express.urlencoded({extended : false}))
