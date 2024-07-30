@@ -5,6 +5,7 @@ import connectDB from './config/database.mjs'
 import userRoutes from './routes/user.mjs'
 import journalRoutes from './routes/journal.mjs'
 import loginRoutes from './routes/login.mjs'
+import apiRoutes from './routes/api.mjs'
 
 
 const app = express()
@@ -26,10 +27,13 @@ app.get('/', (req, res)=> {
     res.send("Express route working")
 })
 
+
 // Routes 
 app.use('/user', userRoutes)
 app.use('/journal', journalRoutes)
 app.use('/login', loginRoutes)
+app.use('/api', apiRoutes)
+
 
 
 // Server Connection 
