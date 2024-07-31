@@ -13,19 +13,22 @@ const app = express()
 dotenv.config();
 
 
-
 // Middleware
 // Cross-Origin Resource Sharing - interactions between different origins (domains) - 
+const allowedOrigins = [process.env.LOCALHOST_URL, process.env.PRODUCTION_URL]
 
+console.log('Allowed Origins:', allowedOrigins);
 
-const allowedOrigins = [process.env.LOCALHOST_URL, process.env.PRODUCTION_URL];
+app.use((req, res, next) => {
+    console.log('Request Origin:', req.headers.origin);
+    next();
+});
 
 
 app.use(cors({
     origin: function (origin, callback) {
-        console.log('Request Origin:', origin)
-
         // Allow requests with no origin
+        console.log('CORS Origin:', origin)
         if (!origin) return callback(null, true);
         if (allowedOrigins.indexOf(origin) === -1) {
             const msg = 'The CORS policy for this site does not allow access from the specified Origin.'
