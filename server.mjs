@@ -19,21 +19,7 @@ const frontendURL = 'https://journai-frontend.vercel.app'
 // Cross-Origin Resource Sharing - interactions between different origins (domains)
 app.use(cors({
     origin: frontendURL,
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'x-auth-token'],
-    credentials: true,
 }))
-
-app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", frontendURL );
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept"
-    )
-    next();
-  })
-
-app.options('*', cors()) // Preflight requests
 
     // Parses incoming requests with URL-encoded (for instance, forms)
     app.use(express.urlencoded({extended : false}))
