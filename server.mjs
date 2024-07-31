@@ -12,7 +12,6 @@ const app = express()
 
 dotenv.config();
 
-
 // Middleware
 const frontendURL = 'https://journai-frontend.vercel.app'
 
@@ -24,11 +23,16 @@ app.use(cors({
     credentials: true,
 }))
 
-app.use((req, res, next) => {
-    // res.setHeader("Access-Control-Allow-Origin", frontendURL)
-        res.setHeader("Access-Control-Allow-Origin", "*")
-    next();
-  });
+// https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#preflighted_requests
+app.options('*', (req, res) => {
+    res.sendStatus(200); // Explicitly return 200 for preflight requests
+})
+
+// app.use((req, res, next) => {
+//     // res.setHeader("Access-Control-Allow-Origin", frontendURL)
+//         res.setHeader("Access-Control-Allow-Origin", "*")
+//     next();
+//   });
 
 
 
