@@ -1,14 +1,16 @@
 {
-    "version": 2,
-    "builds": [
-      { "src": "server.mjs", "use": "@vercel/node" }
-    ],
-    "routes": [
-      { "src": "/api/(.*)", "dest": "server.mjs" },
-      { "src": "/user/(.*)", "dest": "server.mjs" },
-      { "src": "/journal/(.*)", "dest": "server.mjs" },
-      { "src": "/login/(.*)", "dest": "server.mjs" },
-      { "src": "/(.*)", "dest": "index.html" }
-    ]
-  }
-  
+  "version": 2,
+  "builds": [
+    {
+      "src": "server.mjs",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    { "src": "/api/(.*)", "dest": "server.mjs" },
+    { "src": "/user/(.*)", "dest": "server.mjs" },
+    { "src": "/journal/(.*)", "dest": "server.mjs" },
+    { "src": "/login/(.*)", "dest": "server.mjs" },
+    { "src": "/(.*)", "dest": "public/index.html" }
+  ]
+}

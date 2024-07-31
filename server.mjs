@@ -37,6 +37,8 @@ app.get('/', (req, res)=> {
     res.send("Express route working")
 })
 
+// Serve static files
+app.use(express.static('public'))
 
 // Routes 
 app.use('/user', userRoutes)
