@@ -24,6 +24,15 @@ app.use(cors({
     credentials: true,
 }))
 
+app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", frontendURL );
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept"
+    )
+    next();
+  })
+
 app.options('*', cors()) // Preflight requests
 
     // Parses incoming requests with URL-encoded (for instance, forms)
