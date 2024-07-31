@@ -20,8 +20,11 @@ dotenv.config();
 
 const allowedOrigins = [process.env.LOCALHOST_URL, process.env.PRODUCTION_URL];
 
+
 app.use(cors({
     origin: function (origin, callback) {
+        console.log('Request Origin:', origin)
+
         // Allow requests with no origin
         if (!origin) return callback(null, true);
         if (allowedOrigins.indexOf(origin) === -1) {
