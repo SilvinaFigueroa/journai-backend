@@ -6,7 +6,7 @@ const router = express.Router()
 
 dotenv.config()
 
-const apiKey = process.env.VITE_WEATHER_KEY;
+const apiKey = process.env.VITE_WEATHER;
 const weatherApiUrl = 'http://api.weatherapi.com/v1/current.json';
 
 
