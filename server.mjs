@@ -21,6 +21,7 @@ app.use(cors({
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization', 'x-auth-token'],
     credentials: true,
+    optionsSuccessStatus: 200
 }))
 
 // https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#preflighted_requests
