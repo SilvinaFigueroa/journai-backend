@@ -16,11 +16,23 @@ dotenv.config();
 
 // Middleware
 // Cross-Origin Resource Sharing - interactions between different origins (domains) - 
+
+
+const allowedOrigins = [process.env.LOCALHOST_URL, process.env.PRODUCTION_URL];
+
 app.use(cors({
-    origin: [process.env.LOCALHOST_URL, process.env.PRODUCTION_URL],
+    origin: function (origin, callback) {
+        // Allow requests with no origin
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.indexOf(origin) === -1) {
+            const msg = 'The CORS policy for this site does not allow access from the specified Origin.'
+            return callback(new Error(msg), false);
+        }
+        return callback(null, true);
+    },
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization', 'x-auth-token'],
-    credentials: true // Included to send cookies or authentication headers
+    credentials: true
 }));
 
     // Parses incoming requests with URL-encoded (for instance, forms)
