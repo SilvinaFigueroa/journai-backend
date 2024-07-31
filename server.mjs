@@ -12,14 +12,19 @@ const app = express()
 
 dotenv.config();
 
+
 // Middleware
-// Cross-Origin Resource Sharing - interactions between different origins (domains) - 
+const frontendURL = 'https://journai-frontend.vercel.app'
+
+// Cross-Origin Resource Sharing - interactions between different origins (domains)
 app.use(cors({
-    origin: "https://journai-frontend.vercel.app/",
+    origin: frontendURL,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization', 'x-auth-token'],
-    credentials: true
-}));
+    credentials: true,
+}))
+
+app.options('*', cors()) // Preflight requests
 
     // Parses incoming requests with URL-encoded (for instance, forms)
     app.use(express.urlencoded({extended : false}))
