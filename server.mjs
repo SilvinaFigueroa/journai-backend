@@ -12,30 +12,10 @@ const app = express()
 
 dotenv.config();
 
-
 // Middleware
 // Cross-Origin Resource Sharing - interactions between different origins (domains) - 
-const allowedOrigins = [process.env.LOCALHOST_URL, process.env.PRODUCTION_URL]
-
-console.log('Allowed Origins:', allowedOrigins);
-
-app.use((req, res, next) => {
-    console.log('Request Origin:', req.headers.origin);
-    next();
-});
-
-
 app.use(cors({
-    origin: function (origin, callback) {
-        // Allow requests with no origin
-        console.log('CORS Origin:', origin)
-        if (!origin) return callback(null, true);
-        if (allowedOrigins.indexOf(origin) === -1) {
-            const msg = 'The CORS policy for this site does not allow access from the specified Origin.'
-            return callback(new Error(msg), false);
-        }
-        return callback(null, true);
-    },
+    origin: "https://journai-frontend.vercel.app/",
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization', 'x-auth-token'],
     credentials: true
