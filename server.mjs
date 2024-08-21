@@ -25,8 +25,11 @@ const frontendURL = 'https://journai-frontend.vercel.app'
 //     optionsSuccessStatus: 200 // For legacy browser support
 // }))
 
+// Handle preflight requests for all routes
+app.options('*', (req, res) => {
+    res.sendStatus(200); // Respond with HTTP 200 status for OPTIONS preflight requests
+})
 
-// // Handle preflight requests for all routes
 // // https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#preflighted_requests
 // app.options('*', (req, res) => {
 //     res.setHeader('Access-Control-Allow-Origin', frontendURL);
