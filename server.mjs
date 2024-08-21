@@ -27,6 +27,10 @@ app.use(cors({
     optionsSuccessStatus: 200
 }))
 
+
+// Handle OPTIONS requests
+app.options('*', cors()); // Respond to preflight requests
+
 // // https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#preflighted_requests
 // app.options('*', (req, res) => {
 //     res.setHeader('Access-Control-Allow-Origin', frontendURL);
