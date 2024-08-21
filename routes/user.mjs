@@ -11,13 +11,13 @@ import userCRUD from '../controllers/userControllers.mjs'
 
 router.get('/', (req, res) => res.send('Testing user Route'))
 
-router.options('/new', (req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', 'https://journai-frontend.vercel.app');
-    res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, x-auth-token');
-    res.setHeader('Access-Control-Allow-Credentials', 'true');
-    res.sendStatus(200); // Send a 200 OK response
-});
+// router.options('/new', (req, res) => {
+//     res.setHeader('Access-Control-Allow-Origin', 'https://journai-frontend.vercel.app');
+//     res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
+//     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, x-auth-token');
+//     res.setHeader('Access-Control-Allow-Credentials', 'true');
+//     res.sendStatus(200); // Send a 200 OK response
+// });
 
 router.post('/new', 
     [check('firstName', 'First name is required').not().isEmpty(),
