@@ -11,6 +11,9 @@ import userCRUD from '../controllers/userControllers.mjs'
 
 router.get('/', (req, res) => res.send('Testing user Route'))
 
+router.options('/new', (req, res) => res.status(200))
+
+
 router.post('/new', 
     [check('firstName', 'First name is required').not().isEmpty(),
     check('lastName', 'Last name is required').not().isEmpty(),

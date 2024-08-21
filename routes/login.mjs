@@ -14,4 +14,6 @@ router.post('/', [
     ], login.userLogin)
 
 
+router.options('/', (req, res) => res.status(200))
+
 export default router
