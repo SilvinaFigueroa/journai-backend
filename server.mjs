@@ -12,9 +12,6 @@ const app = express()
 
 dotenv.config();
 
-
-
-
 // Middleware
 const frontendURL = 'https://journai-frontend.vercel.app'
 
@@ -23,8 +20,8 @@ app.use(cors({
     origin: frontendURL,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization', 'x-auth-token'],
-    credentials: true,
-    optionsSuccessStatus: 200
+    // credentials: true,
+    // optionsSuccessStatus: 200
 }))
 
 
