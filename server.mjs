@@ -26,18 +26,14 @@ const frontendURL = 'https://journai-frontend.vercel.app'
 // }))
 
 // Handle preflight requests for all routes
-app.options('*', (req, res) => {
-    res.sendStatus(200); // Respond with HTTP 200 status for OPTIONS preflight requests
-})
-
 // // https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#preflighted_requests
-// app.options('*', (req, res) => {
-//     res.setHeader('Access-Control-Allow-Origin', frontendURL);
-//     // res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-//     // res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, x-auth-token');
-//     // res.setHeader('Access-Control-Allow-Credentials', 'true');
-//     res.sendStatus(200); // Respond with HTTP 200 status
-// })
+app.options('*', (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', frontendURL);
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, x-auth-token');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    res.sendStatus(200); // Respond with HTTP 200 status
+})
 
     // Parses incoming requests with URL-encoded (for instance, forms)
     app.use(express.urlencoded({extended : false}))
