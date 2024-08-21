@@ -16,28 +16,25 @@ const frontendURL = 'https://journai-frontend.vercel.app'
 // // Middleware to apply CORS to all routes
 // app.use((req, res, next) => allowCors(next, frontendURL)(req, res));
 
-
 // Cross-Origin Resource Sharing - interactions between different origins (domains)
 app.use(cors({
-    origin: frontendURL,
+    origin: frontendURL, // Explicitly allow your frontend origin
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'x-auth-token'],
-    credentials: true,
-    optionsSuccessStatus: 200
+    credentials: true, // Allow credentials (cookies, authorization headers)
+    optionsSuccessStatus: 200 // For legacy browser support
 }))
 
-// Handle preflight requests for all routes
-app.options('*', (req, res) => {
-    res.sendStatus(200); // This ensures OPTIONS requests return 200 OK
-})
 
-// // https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#preflighted_requests
-// app.options('*', (req, res) => {
-//     res.setHeader('Access-Control-Allow-Origin', frontendURL);
-//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-//     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, x-auth-token');
-//     res.setHeader('Access-Control-Allow-Credentials', 'true');
-// })
+// Handle preflight requests for all routes
+// https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#preflighted_requests
+app.options('*', (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', frontendURL);
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, x-auth-token');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    res.sendStatus(200); // Respond with HTTP 200 status
+})
 
     // Parses incoming requests with URL-encoded (for instance, forms)
     app.use(express.urlencoded({extended : false}))
