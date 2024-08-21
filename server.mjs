@@ -6,35 +6,42 @@ import userRoutes from './routes/user.mjs'
 import journalRoutes from './routes/journal.mjs'
 import loginRoutes from './routes/login.mjs'
 import apiRoutes from './routes/api.mjs'
-
+import allowCors from './allowCors'
 
 const app = express()
-
 dotenv.config();
 
 // Middleware
 const frontendURL = 'https://journai-frontend.vercel.app'
 
-// Cross-Origin Resource Sharing - interactions between different origins (domains)
-app.use(cors({
-    origin: frontendURL,
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'x-auth-token'],
-    credentials: true,
-    optionsSuccessStatus: 200
-}))
+
+// Middleware to apply CORS to all routes
+app.use((req, res, next) => allowCors((req, res) => next(), frontendURL)(req, res))
 
 
-// Handle OPTIONS requests
-// app.options('*', cors()); // Respond to preflight requests
+// // Use the CORS handler with your frontend URL
+// app.use('/your-route', allowCors(handler, frontendURL));
 
-// https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#preflighted_requests
-app.options('*', (req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', frontendURL);
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, x-auth-token');
-    res.setHeader('Access-Control-Allow-Credentials', 'true');
-})
+// // Cross-Origin Resource Sharing - interactions between different origins (domains)
+// app.use(cors({
+//     origin: frontendURL,
+//     methods: ['GET', 'POST', 'PUT', 'DELETE'],
+//     allowedHeaders: ['Content-Type', 'Authorization', 'x-auth-token'],
+//     credentials: true,
+//     optionsSuccessStatus: 200
+// }))
+
+
+// // Handle OPTIONS requests
+// // app.options('*', cors()); // Respond to preflight requests
+
+// // https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#preflighted_requests
+// app.options('*', (req, res) => {
+//     res.setHeader('Access-Control-Allow-Origin', frontendURL);
+//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+//     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, x-auth-token');
+//     res.setHeader('Access-Control-Allow-Credentials', 'true');
+// })
 
     // Parses incoming requests with URL-encoded (for instance, forms)
     app.use(express.urlencoded({extended : false}))
