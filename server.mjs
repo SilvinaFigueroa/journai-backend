@@ -11,7 +11,7 @@ import allowCors from './allowCors.mjs'
 const app = express()
 dotenv.config();
 
-const frontendURL = 'https://journai-frontend.vercel.app'
+const frontendURL = 'https://journai-frontend.vercel.app/'
 
 
 // Use CORS middleware
