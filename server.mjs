@@ -13,17 +13,17 @@ dotenv.config();
 
 const frontendURL = 'https://journai-frontend.vercel.app'
 
-// // Middleware to apply CORS to all routes
+// // Middleware to apply CORS custom function to all routes
 // app.use((req, res, next) => allowCors(next, frontendURL)(req, res));
 
 // Cross-Origin Resource Sharing - interactions between different origins (domains)
-// app.use(cors({
-//     origin: frontendURL, // Explicitly allow your frontend origin
-//     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-//     allowedHeaders: ['Content-Type', 'Authorization', 'x-auth-token'],
-//     credentials: true, // Allow credentials (cookies, authorization headers)
-//     optionsSuccessStatus: 200 // For legacy browser support
-// }))
+app.use(cors({
+    origin: frontendURL, // Explicitly allow your frontend origin
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'x-auth-token'],
+    credentials: true, // Allow credentials (cookies, authorization headers)
+    optionsSuccessStatus: 200 // For legacy browser support
+}))
 
 // Handle preflight requests for all routes
 // // https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#preflighted_requests
