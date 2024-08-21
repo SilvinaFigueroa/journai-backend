@@ -33,13 +33,6 @@ app.options('*', (req, res) => {
     res.sendStatus(200);
 })
 
-// app.use((req, res, next) => {
-//     // res.setHeader("Access-Control-Allow-Origin", frontendURL)
-//         res.setHeader("Access-Control-Allow-Origin", "*")
-//     next();
-//   });
-
-
 
     // Parses incoming requests with URL-encoded (for instance, forms)
     app.use(express.urlencoded({extended : false}))
