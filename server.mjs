@@ -20,21 +20,21 @@ app.use(cors({
     origin: frontendURL,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization', 'x-auth-token'],
-    // credentials: true,
-    // optionsSuccessStatus: 200
+    credentials: true,
+    optionsSuccessStatus: 200
 }))
 
 
 // Handle OPTIONS requests
-app.options('*', cors()); // Respond to preflight requests
+// app.options('*', cors()); // Respond to preflight requests
 
-// // https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#preflighted_requests
-// app.options('*', (req, res) => {
-//     res.setHeader('Access-Control-Allow-Origin', frontendURL);
-//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-//     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, x-auth-token');
-//     res.setHeader('Access-Control-Allow-Credentials', 'true');
-// })
+// https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#preflighted_requests
+app.options('*', (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', frontendURL);
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, x-auth-token');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+})
 
     // Parses incoming requests with URL-encoded (for instance, forms)
     app.use(express.urlencoded({extended : false}))
