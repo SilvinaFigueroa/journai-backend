@@ -29,11 +29,11 @@ app.use(cors({
 // Handle preflight requests for all routes
 // https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#preflighted_requests
 app.options('*', (req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', frontendURL);
-    // res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    // res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, x-auth-token');
-    // res.setHeader('Access-Control-Allow-Credentials', 'true');
-    // res.sendStatus(200); // Respond with HTTP 200 status
+    // res.setHeader('Access-Control-Allow-Origin', frontendURL);
+    // // res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    // // res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, x-auth-token');
+    // // res.setHeader('Access-Control-Allow-Credentials', 'true');
+    res.sendStatus(200); // Respond with HTTP 200 status
 })
 
     // Parses incoming requests with URL-encoded (for instance, forms)
