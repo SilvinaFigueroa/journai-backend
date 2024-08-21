@@ -13,7 +13,4 @@ router.post('/', [
     check('password', "Enter a password with 8 or more characters").isLength({min: 8})
     ], login.userLogin)
 
-
-router.options('/', (req, res) => res.status(200))
-
 export default router
