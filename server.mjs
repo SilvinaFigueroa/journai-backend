@@ -6,7 +6,7 @@ import userRoutes from './routes/user.mjs'
 import journalRoutes from './routes/journal.mjs'
 import loginRoutes from './routes/login.mjs'
 import apiRoutes from './routes/api.mjs'
-import allowCors from './allowCors'
+import allowCors from './allowCors.mjs'
 
 const app = express()
 dotenv.config();

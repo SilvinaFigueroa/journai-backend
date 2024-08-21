@@ -13,5 +13,4 @@ const allowCors = (routeHandler, origin) => async (req, res) => {
     return await routeHandler(req, res)
   }
   
-  export default allowCors
-  
+  export default allowCors  
