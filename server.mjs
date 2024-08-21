@@ -15,25 +15,25 @@ const frontendURL = 'https://journai-frontend.vercel.app'
 
 
 // Use CORS middleware
-app.use(cors({
-    origin: '*',
-    credentials: true,
-    methods: 'GET,POST,PUT,DELETE,OPTIONS',
-    allowedHeaders: 'Content-Type, Authorization, x-auth-token',
-  }))
+// app.use(cors({
+//     origin: '*',
+//     credentials: true,
+//     methods: 'GET,POST,PUT,DELETE,OPTIONS',
+//     allowedHeaders: 'Content-Type, Authorization, x-auth-token',
+//   }))
 
 
 // // Middleware to apply CORS to all routes
 // app.use((req, res, next) => allowCors((req, res) => next(), frontendURL)(req, res))
 
-// // Cross-Origin Resource Sharing - interactions between different origins (domains)
-// app.use(cors({
-//     origin: frontendURL,
-//     methods: ['GET', 'POST', 'PUT', 'DELETE'],
-//     allowedHeaders: ['Content-Type', 'Authorization', 'x-auth-token'],
-//     credentials: true,
-//     optionsSuccessStatus: 200
-// }))
+// Cross-Origin Resource Sharing - interactions between different origins (domains)
+app.use(cors({
+    origin: frontendURL,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'x-auth-token'],
+    credentials: true,
+    optionsSuccessStatus: 200
+}))
 
 
 // // Handle OPTIONS requests
