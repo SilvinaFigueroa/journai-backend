@@ -24,21 +24,21 @@ const frontendURL = 'https://journai-frontend.vercel.app'
 //     credentials: true
 // }))
 
-// // Handle preflight `OPTIONS` requests globally
-// app.options('*', (req, res) => {
-//     console.log('Received OPTIONS request for:', req.path);  // Log the request path
-//     console.log('Origin:', req.headers.origin);              // Log the request origin
-//     console.log('Requested Method:', req.headers['access-control-request-method']) // Log the requested method
-//     console.log('Requested Headers:', req.headers['access-control-request-headers']) // Log the requested headers
+// Handle preflight `OPTIONS` requests globally
+app.options('*', (req, res) => {
+    console.log('Received OPTIONS request for:', req.path);  // Log the request path
+    console.log('Origin:', req.headers.origin);              // Log the request origin
+    console.log('Requested Method:', req.headers['access-control-request-method']) // Log the requested method
+    console.log('Requested Headers:', req.headers['access-control-request-headers']) // Log the requested headers
 
-//     res.setHeader('Access-Control-Allow-Origin', frontendURL)
-//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
-//     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, x-auth-token')
-//     res.setHeader('Access-Control-Allow-Credentials', 'true');
+    res.setHeader('Access-Control-Allow-Origin', frontendURL)
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, x-auth-token')
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
     
-//     console.log('Responding with 200 OK and CORS headers') // Log the response action
-//     res.sendStatus(200); // Respond with HTTP 200 status
-// })
+    console.log('Responding with 200 OK and CORS headers') // Log the response action
+    res.sendStatus(200); // Respond with HTTP 200 status
+})
 // https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#preflighted_requests
 
 
