@@ -13,6 +13,8 @@ dotenv.config();
 
 const frontendURL = 'https://journai-frontend.vercel.app'
 
+console.log('Received request:', req.method, req.path);
+
 // // Middleware to apply CORS custom function to all routes
 // app.use((req, res, next) => allowCors(next, frontendURL)(req, res));
 
