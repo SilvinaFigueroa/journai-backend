@@ -13,7 +13,6 @@ dotenv.config();
 
 const frontendURL = 'https://journai-frontend.vercel.app'
 
-console.log('Received request:', req.method, req.path);
 
 // // Middleware to apply CORS custom function to all routes
 // app.use((req, res, next) => allowCors(next, frontendURL)(req, res));
@@ -28,6 +27,7 @@ console.log('Received request:', req.method, req.path);
 
 // Handle preflight `OPTIONS` requests globally
 app.options('*', (req, res) => {
+    console.log(`Received request: ${req.method}, ${req.path}`)
     console.log('Received OPTIONS request for:', req.path);  // Log the request path
     console.log('Origin:', req.headers.origin);              // Log the request origin
     console.log('Requested Method:', req.headers['access-control-request-method']) // Log the requested method
