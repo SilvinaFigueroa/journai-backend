@@ -22,7 +22,7 @@ app.use(cors({
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'x-auth-token'],
     credentials: true
-}));
+}))
 
 // Handle preflight `OPTIONS` requests globally
 app.options('*', (req, res) => {
