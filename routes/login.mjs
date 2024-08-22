@@ -14,6 +14,9 @@ router.post('/', [
     ], login.userLogin)
 
 
-router.options('/', (req, res) => res.status(200))
+router.options('/', (req, res) => {
+    console.log('OPTIONS request received on /login')
+    res.status(200).send('OK')})
+
 
 export default router
