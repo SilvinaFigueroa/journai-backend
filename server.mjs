@@ -5,9 +5,19 @@ import userRoutes from './routes/user.mjs'
 import journalRoutes from './routes/journal.mjs'
 import loginRoutes from './routes/login.mjs'
 import apiRoutes from './routes/api.mjs'
+import cors from 'cors'
 
 const app = express()
 dotenv.config();
+
+const frontendURL = process.env.WEBSITE_URL
+
+app.use(cors({
+    origin: frontendURL,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'x-auth-token'],
+    credentials: true
+}))
 
 // Parses incoming requests with URL-encoded (for instance, forms)
 app.use(express.urlencoded({ extended: false }))
